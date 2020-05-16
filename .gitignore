@@ -1,0 +1,16 @@
+
+# Created by https://www.gitignore.io/api/node,vuejs,macos,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=node,vuejs,macos,visualstudiocode
+
+.DS_Store
+.AppleDouble
+.LSOverride
+node_modules/
+.npm
+.env
+.env.test
+tmp/
+temp/
+.vscode
+.history
+npm-debug.log
