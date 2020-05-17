@@ -34,11 +34,17 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 1rem auto;
 }
 
 .page-number {
   padding: 0.5rem;
   cursor: pointer;
+}
+
+.current-page {
+  border-radius: 3px;
+  background-color: #dde7a5;
 }
 
 ul {
