@@ -18,14 +18,11 @@
       <input type="text" placeholder="define word" @keyup="search" v-model="word">
     </div>
     <div>
-      <div v-if="lastPage > 10" class="pagination">
-        <div v-for="page in pages" class="page-number" :class="currentPage === page && 'current-page'"
+      <div class="pagination">
+        <div v-for="page in pagination.pages" class="page-number" :class="currentPage === page && 'current-page'"
           @click="goto(page)">
           {{page}}
         </div>
-        <div class="page-number">.</div>
-        <div class="page-number">.</div>
-        <div class="page-number">.</div>
         <div class="page-number" @click="goto(lastPage)">{{lastPage}}</div>
       </div>
       <div v-if="lastPage < 10 && lastPage > 1">
