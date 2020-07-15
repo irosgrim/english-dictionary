@@ -22,12 +22,13 @@ h1 {
 }
 
 .search-form input {
-  width: 100%;
+  width: calc(100% - 2rem);
   height: 38px;
   border-radius: 4px;
   border: 1px solid #ababab;
   font-size: 1.4rem;
   padding: 0 1rem;
+  margin: 0 1rem;
 }
 
 .pagination {
@@ -37,12 +38,11 @@ h1 {
   margin: 1rem auto;
 }
 
-.page-number {
+.pagination .page-number {
   padding: 0.5rem;
-  cursor: pointer;
 }
 
-.current-page {
+.pagination .current-page {
   border-radius: 3px;
   background-color: #dde7a5;
 }
@@ -52,27 +52,34 @@ ul {
   margin: 1rem;
 }
 
-li {
+ul li {
   padding: 0.5rem 1rem;
   display: flex;
+  border-top: 1px solid #b7c4a7;
 }
 
-li:first-child {
-  border-top: 1px solid #ababab;
+ul li .word {
+  width: 50%;
 }
 
-li:not(:last-child) {
-  border-bottom: 1px solid #ababab;
+@media (min-width: 900px) {
+  ul li .word {
+    width: 20%;
+  }
 }
 
-li:nth-child(odd) {
+ul li .word-definition {
+  width: 100%;
+}
+
+ul li:nth-child(odd) {
   background-color: #fbfcf6;
 }
 
-.word {
-  width: 20%;
+.highlight {
+  font-weight: bold;
 }
 
-.word-definition {
-  width: 80%;
+.cursor-pointer {
+  cursor: pointer;
 }

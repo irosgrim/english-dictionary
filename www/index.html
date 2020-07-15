@@ -2,41 +2,63 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>english dictionary of words</title>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <link rel="stylesheet" href="./styles/app.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>english dictionary of words</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="./styles/app.css">
 </head>
 
 <body>
-  <div id="app">
-    <h1>{{title}}</h1>
-    <div class="search-form">
-      <input type="text" placeholder="define word" @keyup="search" v-model="word">
-    </div>
-    <div>
-      <div class="pagination">
-        <div v-for="page in pagination.pages" class="page-number" :class="currentPage === page && 'current-page'"
-          @click="goto(page)">
-          {{page}}
+    <div id="app">
+        <h1>{{title}}</h1>
+        <div class="search-form">
+            <input type="text" placeholder="define word" @keyup="search" v-model="word">
         </div>
-        <div class="page-number" @click="goto(lastPage)">{{lastPage}}</div>
-      </div>
-      <div v-if="lastPage < 10 && lastPage > 1">
-        <div v-for="page in lastPage" @click="goto(page)">{{page}}</div>
-      </div>
-      <ul>
-        <li v-for="word in words" :key="word.id">
-          <div class="word">{{word.word}}</div>
-          <div class="word-definition">{{word.definition}}</div>
-        </li>
-      </ul>
+        <div >
+            <div class="pagination" v-if="pagination.pages.length > 1">
+                <div v-for="page in pagination.pages" class="page-number cursor-pointer"
+                    :class="pagination.currentPage === page && 'current-page'" @click="goto(page)">
+                    {{page}}
+                </div>
+                <div v-if="pagination.endPage < pagination.totalPages" style="display: flex;">
+                    <div class="page-number">.</div>
+                    <div class="page-number">.</div>
+                    <div class="page-number">.</div>
+                    <div class="page-number cursor-pointer"
+                        :class="pagination.currentPage === pagination.totalPages && 'current-page'" @click="goto(pagination.totalPages)"
+                    >
+                        {{pagination.totalPages}}
+                    </div>
+                </div>
+            </div>
+            <ul>
+                <li v-for="word in words" :key="word.id">
+                    <div class="word">{{word.word}}</div>
+                    <div class="word-definition">{{word.definition}}</div>
+                </li>
+            </ul>
+            <div class="pagination" v-if="pagination.pages.length > 1">
+                <div v-for="page in pagination.pages" class="page-number cursor-pointer"
+                    :class="pagination.currentPage === page && 'current-page'" @click="goto(page)">
+                    {{page}}
+                </div>
+                <div v-if="pagination.endPage < pagination.totalPages" style="display: flex;">
+                    <div class="page-number">.</div>
+                    <div class="page-number">.</div>
+                    <div class="page-number">.</div>
+                    <div class="page-number cursor-pointer"
+                        :class="pagination.currentPage === pagination.totalPages && 'current-page'" @click="goto(pagination.totalPages)"
+                    >
+                        {{pagination.totalPages}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <script src="./app/app.js"></script>
+    <script src="./app/app.js"></script>
 </body>
 
 </html>
