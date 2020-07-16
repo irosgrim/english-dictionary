@@ -81,6 +81,7 @@ function pagination ( totalItems = 0, currentPage = 1, pageSize = 5, maxPages = 
         endPage,
         startIndex,
         endIndex,
-        pages
+        pages,
+        maxPages
     }
 }

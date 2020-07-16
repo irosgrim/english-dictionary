@@ -18,21 +18,8 @@
             <input type="text" placeholder="define word" @keyup="search" v-model="word">
         </div>
         <div >
-            <div class="pagination" v-if="pagination.pages.length > 1">
-                <div v-for="page in pagination.pages" class="page-number cursor-pointer"
-                    :class="pagination.currentPage === page && 'current-page'" @click="goto(page)">
-                    {{page}}
-                </div>
-                <div v-if="pagination.endPage < pagination.totalPages" style="display: flex;">
-                    <div class="page-number">.</div>
-                    <div class="page-number">.</div>
-                    <div class="page-number">.</div>
-                    <div class="page-number cursor-pointer"
-                        :class="pagination.currentPage === pagination.totalPages && 'current-page'" @click="goto(pagination.totalPages)"
-                    >
-                        {{pagination.totalPages}}
-                    </div>
-                </div>
+            <div v-if="words.length">
+                <Pagination :pagination="pagination" @goto="goto"/>
             </div>
             <ul>
                 <li v-for="word in words" :key="word.id">
@@ -40,21 +27,9 @@
                     <div class="word-definition">{{word.definition}}</div>
                 </li>
             </ul>
-            <div class="pagination" v-if="pagination.pages.length > 1">
-                <div v-for="page in pagination.pages" class="page-number cursor-pointer"
-                    :class="pagination.currentPage === page && 'current-page'" @click="goto(page)">
-                    {{page}}
-                </div>
-                <div v-if="pagination.endPage < pagination.totalPages" style="display: flex;">
-                    <div class="page-number">.</div>
-                    <div class="page-number">.</div>
-                    <div class="page-number">.</div>
-                    <div class="page-number cursor-pointer"
-                        :class="pagination.currentPage === pagination.totalPages && 'current-page'" @click="goto(pagination.totalPages)"
-                    >
-                        {{pagination.totalPages}}
-                    </div>
-                </div>
+
+            <div v-if="words.length > 10">
+                <Pagination :pagination="pagination" @goto="goto"/>
             </div>
         </div>
     </div>

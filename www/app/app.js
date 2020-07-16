@@ -1,6 +1,52 @@
+
+const Pagination = Vue.component('Pagination', {
+    props: {
+        pagination: Object
+    },
+    methods: {
+        goto: function (pageNumber) {
+            this.$emit('goto', pageNumber);
+        }
+    },
+    template: `
+        <div class="pagination">
+            <div v-if="pagination.endPage > pagination.maxPages" style="display: flex;">
+                <div class="page-number cursor-pointer"
+                    :class="pagination.currentPage === 1 && 'current-page'"
+                     @click="goto(1)"
+                >
+                    1
+                </div>
+                <div class="page-number">
+                    -
+                </div>
+            </div>
+            <div v-if="pagination.totalPages > 1" style="display: flex;">
+                <div v-for="page in pagination.pages" 
+                    class="page-number cursor-pointer"
+                    :class="pagination.currentPage === page && 'current-page'" 
+                    @click="goto(page)"
+                    :key="page"
+                >
+                    {{page}}
+                </div>
+            </div>
+            <div v-if="pagination.endPage < pagination.totalPages" style="display: flex;">
+                <div class="page-number">-</div>
+                <div class="page-number cursor-pointer"
+                    :class="pagination.currentPage === pagination.totalPages && 'current-page'" @click="goto(pagination.totalPages)"
+                >
+                    {{pagination.totalPages}}
+                </div>
+            </div>
+        </div>
+    `
+  });
+
 let debouncer;
 const app = new Vue({
     el: '#app',
+    components: { Pagination },
     data: function () {
         return {
             title: 'english dictionary',
@@ -22,7 +68,7 @@ const app = new Vue({
         }
     },
     mounted: function () {
-        this.query('', this.resultsPerPage);
+        this.query('', 20, 1);
     },
     methods: {
 
